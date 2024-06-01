@@ -8,7 +8,7 @@
       when: ansible_facts['distribution'] != 'Ubuntu'
     - name: install java-11 
       ansible.builtin.fail:
-        name: "{{ java_package }}"
+        name: "{{ java_package}}"
         state: present
         update_cache: true
     - name: tomcat group add
