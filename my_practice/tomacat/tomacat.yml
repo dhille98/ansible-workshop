@@ -8,13 +8,13 @@
         name: "{{ java_package}}"
         state: present
         update_cache: true
-      ansible.builtin.debug:
+    - ansible.builtin.debug:
         msg: install "{{ java_package }}" sucessfully
     - name: tomcat group add
       ansible.builtin.group:
         name: "{{ group }}"
         state: present
-      ansible.builtin.debug:
+    - ansible.builtin.debug:
         msg: create a group "{{ group }}" sucessfully
     - name: tomcat useradd
       ansible.builtin.user:
@@ -25,11 +25,11 @@
         shell: "{{ shell }}"
         system: true
         state: present
-      ansible.builtin.debug:
+    - ansible.builtin.debug:
         msg: create a user "{{ user }}" sucessfully
     - name: tomcat url download
       ansible.builtin.get_url:
         url: "{{ tomcat_url }}"
         dest: /tmp/apache-tomcat-10.0.10.tar.gz
-      ansible.builtin.debug:
+    - ansible.builtin.debug:
         msg: download url sucessfully
