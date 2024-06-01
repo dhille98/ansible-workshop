@@ -1,0 +1,7 @@
+---
+java_package: openjdk-17-jdk
+group: tomcat
+user: tomcat
+home: /opt/tomcat
+shell: '/bin/false'
+tomcat_url: "https://archive.apache.org/dist/tomcat/tomcat-10/v10.0.10/bin/apache-tomcat-10.0.10.tar.gz"

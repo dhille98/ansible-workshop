@@ -1,0 +1,9 @@
+# https://tecadmin.net/how-to-install-tomcat-on-ubuntu-22-04/
+# sudo apt update && sudo apt upgrade -y 
+# sudo apt install openjdk-11-jdk
+# sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat 
+# wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.19/bin/apache-tomcat-10.1.19.tar.gz 
+# sudo tar xzf apache-tomcat-*.tar.gz -C /opt/tomcat 
+# sudo chown -R tomcat: /opt/tomcat 
+# sudo sh -c 'chmod +x /opt/tomcat/bin/*.sh' 
+# 
