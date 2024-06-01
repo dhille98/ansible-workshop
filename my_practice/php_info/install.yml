@@ -8,17 +8,13 @@
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
     - name: install apache on ubuntu
       ansible.builtin.apt:
-        name: apache2
+        name: "{{ package }}"
         state: present
         update_cache: true
-    - name: starte the apache2 service
-      service: 
-        name: apache2
-        state: started 
-        enabled: yes
+    
     - name: install php service
       apt: 
-        name: php libapache2-mod-php, php-mysql
+        name: "{{ php_packages }}"
         state: present
         update_cache: true
     - name: copy the file
