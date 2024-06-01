@@ -1,0 +1,5 @@
+- name: docker installations
+  hosts: all
+  become: yes
+  tasks:
+    - name: install 

@@ -1,0 +1,5 @@
+# sudo apt update
+# sudo apt install nginx
+
+# ansible-playbook -i hosts --syntax-check test.yml
+# ansible-playbook -i hosts test.yml

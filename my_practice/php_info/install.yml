@@ -1,0 +1,31 @@
+- name: php installations
+  hosts: all
+  become: yes
+  tasks:
+    - name: fail for unsupported os
+      ansible.builtin.fail:
+        msg: "This playbook is designed only for Ubuntu os"
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+    - name: install apache on ubuntu
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+    - name: starte the apache2 service
+      service: 
+        name: apache2
+        state: started 
+        enabled: yes
+    - name: install php service
+      apt: 
+        name: php libapache2-mod-php, php-mysql
+        state: present
+        update_cache: true
+    - name: copy the file
+      copy: 
+        src: info.php
+        dest: /var/www/html/info.php
+    - name: restart apache
+      service:
+        name: apache2
+        state: restarted 

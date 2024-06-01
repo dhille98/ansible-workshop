@@ -1,0 +1,15 @@
+- name: install  apache service 
+  hosts: all
+  become: yes
+  tasks: 
+    - name: install apache on ubuntu server
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: true
+        state: present
+    - name: Make sure a service unit is running
+      ansible.builtin.systemd_service:
+        name: apache2
+        enabled: yes
+        state: started 
+      

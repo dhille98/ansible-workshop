@@ -1,0 +1,10 @@
+- name: install ngnix service
+  hosts: all
+  become: yes
+  tasks: 
+    - name: install ngnix on ubuntu
+      ansible.builtin.apt:
+        name: ngnix
+        state: present
+        update_cache: true
+       

@@ -1,0 +1,8 @@
+# sudo apt update
+# sudo apt install apache
+# sudo systemctl start apache.service
+# sudo systemctl enabule apche.service
+
+
+# ansible-playbook -i hosts --syntax-check test.yml
+# ansible-playbook -i hosts test.yml
