@@ -53,7 +53,7 @@
       register: shell_files
 
     # change the permissions on all *.sh files 
-    
+
     - name: change permissions to execute
       file:
         path: "{{ item.path }}"
@@ -61,3 +61,50 @@
         group: "{{ group }}"
         mode: "755"
       loop: "{{ shell_files.files }}"
+
+    - name: create tomcat application accounts
+      ansible.builtin.template:
+        src: templates/tomcat-users.xml.j2
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/conf/tomcat-users.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0600'
+      notify:
+        - restart tomcat
+    - name: allow remote hosts for manager
+      ansible.builtin.template:
+        src: templates/manager-context.xml.j2
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/webapps/manager/META-INF/context.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0640'
+      notify:
+        - restart tomcat
+    - name: allow remote hosts for host-manager
+      ansible.builtin.template:
+        src: templates/hostmanager-context.xml.j2
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/webapps/host-manager/META-INF/context.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0640'
+      notify:
+        - restart tomcat
+    - name: Create a Systemd Service File
+      ansible.builtin.template:
+        src: templates/tomcat.service.j2
+        dest: "/etc/systemd/system/tomcat.service"
+      notify:
+        - start tomcat
+  handlers:
+    - name: start tomcat
+      ansible.builtin.systemd_service:
+        name: tomcat
+        enabled: yes
+        daemon_reload: yes
+        state: started
+    - name: restart tomcat
+      ansible.builtin.systemd_service:
+        name: tomcat
+        enabled: yes
+        daemon_reload: yes
+        state: restarted
