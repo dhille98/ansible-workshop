@@ -5,7 +5,7 @@
     - name: fail for unsupported os
       ansible.builtin.fail:
         msg: "This playbook is designed only for Ubuntu os"
-      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+      when: ansible_facts['distribution'] != 'Ubuntu'
     - name: install apache on ubuntu
       ansible.builtin.apt:
         name: "{{ package }}"
